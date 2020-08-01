@@ -3,10 +3,28 @@
 struct node {
     int val;
     node *next;
-};
-
+};    
 node *start;
-
+void del_duplicate()
+{
+    struct node *p,*t;
+    p=start;
+    t=start->next;
+    while(t!=NULL)
+    {
+        if(t->val!=p->val)
+        {
+            p=t;
+            t=t->next;
+        }
+        else
+        {
+            p->next=t->next;
+            delete t;
+            t=p->next;
+        }
+    }
+}
 void insert(int x) {
     node *t = start;
     node *n = new node;
@@ -98,6 +116,7 @@ int main() {
         std::cout << "\n3. Search";
         std::cout << "\n4. Print";
         std::cout << "\n5. Reverse";
+        std::cout << "\n6. Return a list with unique elements";
         std::cout << "\n0. Exit";
         std::cout << "\n\nEnter you choice : ";
         std::cin >> choice;
@@ -127,6 +146,11 @@ int main() {
             show();
             std::cout << "\n";
             break;
+        case 6:
+                std::cout<< "The list with unique elements is : \n";
+                del_duplicate();
+                show();
+                break;
         }
     } while (choice != 0);
 
